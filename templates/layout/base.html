@@ -1,0 +1,30 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>{% block page_title %}pushwatch - Online GCM and APNS notigication tester{% endblock page_title %}</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/skeleton.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/pushwatch.css' %}" />
+
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/pushwatch.js' %}"></script>
+    </head>
+
+    <body>
+        {% block header %}
+            {% include  'partials/header.html' %}
+        {% endblock header %}
+
+        {% block content %}
+        {% endblock content %}
+        {% block footer %}
+            {% include 'partials/footer.html' %}
+        {% endblock footer %}
+    </body>
+</html>
