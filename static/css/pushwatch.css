@@ -324,3 +324,6 @@ div.messages {
     border: 1px solid #96F7D1!important;
     color: #388C6C;
 }
+h4.title {
+    margin-bottom: 5rem;
+}
