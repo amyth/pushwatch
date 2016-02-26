@@ -1,7 +1,7 @@
 appnope==0.1.0
 decorator==4.0.9
 Django==1.9.2
-django-instapush==1.0.1
+django-instapush==1.0.3
 gnureadline==6.3.3
 ipython==4.1.1
 ipython-genutils==0.1.0

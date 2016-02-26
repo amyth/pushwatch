@@ -63,3 +63,9 @@ target/
 
 ## Swp files
 *.swp
+
+## templ
+temp/
+
+## DB
+db.*

@@ -21,15 +21,10 @@ class APNSTester(FormView):
 
     def form_valid(self, form, *args, **kwargs):
 
-        result = form.send_message()
         try:
-            result = form.send_message()
-            print result
-            if result.get('failure'):
-                error = result.get('results')[0]['error']
-                messages.error(self.request, error)
-            elif result.get('success'):
-                messages.success(self.request, 'Message(s) sent.')
+            x = form.send_message()
+            print x
+            messages.success(self.request, 'Message(s) sent.')
         except Exception as err:
             messages.error(self.request, str(err))
 

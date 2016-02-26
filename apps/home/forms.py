@@ -18,7 +18,7 @@ class APNSForm(forms.Form):
 
         f = self.cleaned_data.get('pem_certificate')
         content = f.readlines()
-        tfile = open("temp/%s" % f.name, 'w')
+        tfile = open("/tmp/%s" % f.name, 'w')
         tfile.writelines(content)
         filename = os.path.abspath(tfile.name)
         tfile.close()
@@ -33,9 +33,7 @@ class APNSForm(forms.Form):
         json_data = data.get('apns_data')
         message_obj = json.loads(json_data) if json_data else {"message": message}
 
-        print pem_cert
-
-        return apns.apns_send_bulk_message(ids, message_obj, certfile=pem_cert)
+        return apns.apns_send_bulk_message(ids, message_obj, certfile=os.path.abspath(pem_cert))
 
 
 class GCMForm(forms.Form):
