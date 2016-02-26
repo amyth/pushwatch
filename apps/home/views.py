@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
-from .forms import GCMForm
+from .forms import APNSForm, GCMForm
 
 
 class Home(TemplateView):
@@ -13,9 +13,27 @@ class Home(TemplateView):
     template_name = 'home/index.html'
 
 
-class APNSTester(TemplateView):
+class APNSTester(FormView):
 
     template_name = 'apns_tester.html'
+    form_class = APNSForm
+    success_url = reverse_lazy('home:apns')
+
+    def form_valid(self, form, *args, **kwargs):
+
+        result = form.send_message()
+        try:
+            result = form.send_message()
+            print result
+            if result.get('failure'):
+                error = result.get('results')[0]['error']
+                messages.error(self.request, error)
+            elif result.get('success'):
+                messages.success(self.request, 'Message(s) sent.')
+        except Exception as err:
+            messages.error(self.request, str(err))
+
+        return super(APNSTester, self).form_valid(form, *args, **kwargs)
 
 
 class GCMTester(FormView):
@@ -28,7 +46,7 @@ class GCMTester(FormView):
         """
         Called if the form validation passes.
         """
-        print "Form valid"
+
         result = form.send_message()
         try:
             result = form.send_message()

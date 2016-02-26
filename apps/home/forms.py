@@ -1,8 +1,41 @@
+import os
 import json
 
 from django import forms
 
-from instapush.libs import gcm
+from instapush.libs import gcm, apns
+
+
+class APNSForm(forms.Form):
+
+    pem_certificate = forms.FileField()
+    device_tokens = forms.CharField(widget=forms.Textarea)
+    apns_message = forms.CharField(widget=forms.Textarea, required=False)
+    apns_data = forms.CharField(widget=forms.Textarea, required=False)
+    use_json = forms.BooleanField(required=False)
+
+    def clean_pem_certificate(self):
+
+        f = self.cleaned_data.get('pem_certificate')
+        content = f.readlines()
+        tfile = open("temp/%s" % f.name, 'w')
+        tfile.writelines(content)
+        filename = os.path.abspath(tfile.name)
+        tfile.close()
+
+        return filename
+
+    def send_message(self, *args, **kwargs):
+        data = self.cleaned_data
+        pem_cert = data.get('pem_certificate')
+        message = data.get('apns_message')
+        ids = data.get('device_tokens').split(",")
+        json_data = data.get('apns_data')
+        message_obj = json.loads(json_data) if json_data else {"message": message}
+
+        print pem_cert
+
+        return apns.apns_send_bulk_message(ids, message_obj, certfile=pem_cert)
 
 
 class GCMForm(forms.Form):
