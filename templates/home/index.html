@@ -31,13 +31,13 @@
 </div>
 <div class="splitter">
     <div class="split">
-        <a href="#" class="split-link">
+        <a href="{% url 'home:apns' %}" class="split-link">
             <img src="{% static 'images/cloud-apple.png' %}" />
             <p>Test APNS notifications</p>
         </a>
     </div>
     <div class="split u-pull-right">
-        <a href="#" class="split-link">
+        <a href="{% url 'home:gcm' %}" class="split-link">
             <img src="{% static 'images/cloud-android.png' %}" />
             <p>Test GCM notifications</p>
         </a>
