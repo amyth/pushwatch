@@ -5,10 +5,10 @@
             <li class="navbar-item"><a class="navbar-link logo" href="{% url 'home:index' %}"><img src="{% static 'images/pushwatch.png' %}" /></a></li>
             <li class="navbar-item"><a class="navbar-link" href="{% url 'home:apns' %}">Test APNS</a></li>
             <li class="navbar-item"><a class="navbar-link" href="{% url 'home:gcm' %}">Test GCM</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="#">How to Test</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="#">Source</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="#">Author</a></li>
-            <li class="navbar-item"><a class="navbar-link" href="#">Contact</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="{% url 'home:index' %}#howto">How to Test</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="https://github.com/amyth/pushwatch" target="_blank">Source</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="https://twitter.com/mytharora" target="_blank">Author</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="http://www.techstricks.com/contact-us/">Contact</a></li>
         </ul>
     </div>
 </nav>
